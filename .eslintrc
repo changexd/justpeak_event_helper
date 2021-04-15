@@ -1,0 +1,61 @@
+{
+    "extends": [
+      "airbnb-typescript",
+      "airbnb/hooks",
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:jest/recommended",
+      "prettier",
+      "prettier/react",
+      "prettier/@typescript-eslint",
+      "plugin:prettier/recommended"
+    ],
+    "plugins": ["react", "@typescript-eslint", "jest"],
+    "env": {
+      "browser": true,
+      "es6": true,
+      "jest": true
+    },
+    "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": 2018,
+      "sourceType": "module",
+      "project": "./tsconfig.json"
+    },
+    "rules": {
+      "linebreak-style": "off",
+      "import/prefer-default-export": "off",
+      "global-require": "off",
+      "prettier/prettier": [
+        "error",
+        {
+          "endOfLine": "auto"
+        }
+      ],
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": ["**/*.stories.tsx"]
+        }
+      ]
+    },
+    "overrides": [
+      // This override will ignore the prop type validation because
+      // eslint will ignore the React.FC<ComponentPros>. So, the all
+      // of prop type won't pass eslint.
+      {
+        "files": ["**/*.tsx"],
+        "rules": {
+          "react/prop-types": "off"
+        }
+      }
+    ]
+  }
+  

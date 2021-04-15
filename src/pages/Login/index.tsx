@@ -7,7 +7,7 @@ import FacebookLogin from 'react-facebook-login';
 import {FB_Login} from '../../service/api/FB_Login';
 // import {IEvent, login_status} from '../models/models';
 import {Link} from 'react-router-dom';
-import {useForm} from '../hooks/useForm';
+import {useForm} from '../../shared/hooks/useForm';
 
 function RegisterForm({setAuth}: any) {
   //type memberInfo

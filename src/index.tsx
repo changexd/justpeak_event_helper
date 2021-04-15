@@ -1,15 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import * as ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import {login_status} from './models/models';
 import {AuthProvider} from './shared/contexts/authContext';
-
-// import {
-//   StatusContext,
-//   StatusProvider,
-// } from './shared/contexts/statusContext';
 
 function FB_init() {
   return new Promise((resolve) => {
