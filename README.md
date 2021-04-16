@@ -6,28 +6,28 @@ Please Feel Free to Join Us!
 
 # Table of Contents
 
-- [General Info](#General Info)
+- [General Info](#General-Info)
 
 - [Technology](#Technology)
 
 - [Contributors](#Contributors)
 
-#General Info
+# General Info
 
 So far it is in development, more features will be added in this section
 
-#Technology
-###Front End
+# Technology
+### Front End
 
-- #####TypeScript
-- #####Sass
-- #####React.js
-- #####TypeScript
+* TypeScript
+* Sass
+* React.js
+* TypeScript
 
-###Back End
+### Back End
 
-- ##### C#
-- #####ASP.NET CORE
-- #####Entity Framework
+- C#
+- ASP.NET CORE
+- Entity Framework
 
-#Contributors
+# Contributors
