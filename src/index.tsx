@@ -3,9 +3,9 @@ import * as ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {AuthProvider} from './shared/contexts/authContext';
+import { AuthProvider } from './shared/contexts/authContext';
 
-function FB_init() {
+function FBinit() {
   return new Promise((resolve) => {
     (window as any).fbAsyncInit = function () {
       window.FB.init({
@@ -20,25 +20,25 @@ function FB_init() {
     };
 
     (function (d, s, id) {
-      var js: any,
-        fjs: any = d.getElementsByTagName(s)[0];
+      const js: any = d.createElement(s);
+      const fjs: any = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) {
         return;
       }
-      js = d.createElement(s);
       js.id = id;
       js.src = 'https://connect.facebook.net/en_US/sdk.js';
       fjs.parentNode.insertBefore(js, fjs);
-    })(document, 'script', 'facebook-jssdk');
+    }(document, 'script', 'facebook-jssdk'));
   });
 }
-FB_init().then(startApp);
+FBinit().then(startApp);
+
 function startApp() {
   ReactDOM.render(
     <React.StrictMode>
       <AuthProvider>
         {/* <StatusProvider> */}
-          <App />
+        <App />
         {/* </StatusProvider> */}
       </AuthProvider>
     </React.StrictMode>,

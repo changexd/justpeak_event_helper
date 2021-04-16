@@ -1,4 +1,4 @@
-export default {}
+export default {};
 // import {useContext, useEffect, useState} from 'react';
 // import {StatusContext} from '../../shared/contexts/statusContext';
 // import {request} from '../shared/request';

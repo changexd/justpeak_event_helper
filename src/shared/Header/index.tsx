@@ -1,6 +1,6 @@
 import React from 'react';
-import SignUpLogo from './Assets/SignUpLogo.png';
-import Logo from './Assets/Logo.png';
+import SignUpLogo from '../../assets/SignUpLogo.png';
+import Logo from '../../assets/Logo.png';
 export default function Header(props: {
   children: React.ReactNode;
   title: string;
