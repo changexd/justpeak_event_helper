@@ -6,7 +6,6 @@
   width: 100%;
   min-height: min-content;
   height: 90vh;
-  max-height: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -60,5 +59,84 @@
     justify-self: center;
     grid-column: 4/6;
     grid-row: 5/6;
+  }
+}
+.EventPage {
+  position: relative;
+  padding-top: 1.5rem;
+  width: 100%;
+  height: 100%;
+  min-height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  overflow: scroll;
+  > div {
+    text-align: center;
+    width: 90%;
+    margin-bottom: 1.5rem;
+  }
+  .Date {
+    height: 10%;
+  }
+  .EventName {
+    height: 10%;
+  }
+  .HostName {
+    height: 10%;
+  }
+  .EventInfo {
+    height: 45%;
+  }
+  .Participants {
+    height: 20%;
+  }
+  .SignUp {
+    height: 5%;
+  }
+  .ParticiapntsCheck {
+    height: auto;
+  }
+}
+.SignUpForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.589);
+}
+.FormContainer {
+  height: 80%;
+  width: 90%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem;
+  > button {
+    width: 30%;
+  }
+  > div,
+  p {
+    width: 100%;
+  }
+  .FormSelection {
+    text-align: left;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+  > p {
+    height: 50%;
+    overflow: scroll;
   }
 }

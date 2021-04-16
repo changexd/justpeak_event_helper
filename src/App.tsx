@@ -75,12 +75,12 @@ function App() {
       <div className='App'>
         <Switch>
           {/* <HostProvider> */}
-          <Route exact path='/login'>
+          <Route path='/login'>
             <Header title='SignUp'>
               <LogIn />
             </Header>
           </Route>
-          <Route exact path='/events'>
+          <Route path='/events'>
             <Header title='Events'>
               <Events />
             </Header>

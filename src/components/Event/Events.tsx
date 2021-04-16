@@ -1,3 +1,5 @@
+import {useRouteMatch, Switch, Route} from 'react-router-dom';
+import EventPage from './EventPage';
 import * as uuid from 'uuid';
 
 interface IEventTag {
@@ -16,6 +18,7 @@ interface IEventInfo {
 }
 
 function EventItem(prop: IEventInfo) {
+  //TODO Add Event link button
   const DateString = prop.EventDate.toDateString().split(' ');
   return (
     <div className='EventItem'>
@@ -37,6 +40,7 @@ function EventItem(prop: IEventInfo) {
           </p>
           <h2 className='EventName'>{prop.EventName}</h2>
           <h2 className='HostName'>{prop.HostName}</h2>
+
           <p className='More'>more..</p>
         </div>
       )}
@@ -45,8 +49,27 @@ function EventItem(prop: IEventInfo) {
 }
 
 export default function Events() {
+  const {path, url} = useRouteMatch();
   const nowDate = new Date();
   const data = [
+    {
+      EventId: 1,
+      EventDate: new Date('2021-04-14T19:30'),
+      EventName: 'Gay Marriage',
+      Week: 2,
+      IsCancel: false,
+      HostName: 'Darren',
+      EventTags: [{EventTagEng: 'gay', EventTagZht: 'gay'}],
+    },
+    {
+      EventId: 1,
+      EventDate: new Date('2021-04-14T19:30'),
+      EventName: 'Gay Marriage',
+      Week: 2,
+      IsCancel: false,
+      HostName: 'Darren',
+      EventTags: [{EventTagEng: 'gay', EventTagZht: 'gay'}],
+    },
     {
       EventId: 1,
       EventDate: new Date('2021-04-14T19:30'),
@@ -91,8 +114,16 @@ export default function Events() {
     );
   });
   return (
-    <div className='EventWrap'>
-      <div className='Event'>{EventList}</div>
+    <div>
+      {' '}
+      <Switch>
+        <Route exact path={path}>
+          <div className='Event'>{EventList}</div>
+        </Route>
+        <Route path={`${path}/:EventId`}>
+          <EventPage />
+        </Route>
+      </Switch>
     </div>
   );
 }
