@@ -1,0 +1,50 @@
+.Header {
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  > div {
+    height: 80%;
+  }
+  .Header__SignUpLogo {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    width: 70%;
+  }
+  .Header__Logo {
+    width: 70%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    font-size: 1.5rem;
+    img {
+      object-fit: contain;
+      height: 100%;
+      width: 50%;
+    }
+    p {
+      text-align: center;
+      width: 40%;
+    }
+  }
+  .Header__NavContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 10%;
+  }
+  .Header__Nav {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .bar {
+    width: 100%;
+    background-color: rgb(136, 136, 136);
+    height: 15%;
+  }
+}

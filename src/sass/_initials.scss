@@ -1,0 +1,35 @@
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+ul[class],
+ol[class] {
+  list-style: none;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+.html {
+  font-size: 10px;
+}
+
+a {
+  text-decoration: none;
+}
+$ThemeBlue: rgb(38, 192, 212);
+$ThemeYellow: rgb(204, 201, 23);
+$FBBlue: rgb(66, 103, 178);

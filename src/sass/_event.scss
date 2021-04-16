@@ -1,0 +1,142 @@
+.EventWrap {
+  overflow: hidden;
+}
+.Event {
+  padding-top: 1.5rem;
+  width: 100%;
+  min-height: min-content;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: scroll;
+}
+.EventItem {
+  margin-bottom: 1.5rem;
+  background-color: grey;
+  flex-shrink: 0;
+  height: 30%;
+  width: 90%;
+  background-color: green;
+  div {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  }
+  .ThisWeek {
+    align-self: center;
+    justify-self: center;
+    grid-column: 1/3;
+    grid-row: 1/2;
+  }
+  .Date {
+    align-self: center;
+    justify-self: center;
+    grid-column: 1/3;
+    grid-row: 2/3;
+  }
+  .HostName {
+    align-self: center;
+    justify-self: center;
+    grid-column: 1/6;
+    grid-row: 3/4;
+  }
+  button {
+    grid-column: 4/6;
+    grid-row: 1/2;
+  }
+  .EventName {
+    align-self: center;
+    justify-self: center;
+    grid-column: 1/6;
+    grid-row: 4/5;
+  }
+  .More {
+    align-self: center;
+    justify-self: center;
+    grid-column: 4/6;
+    grid-row: 5/6;
+  }
+}
+.EventPage {
+  position: relative;
+  padding-top: 1.5rem;
+  width: 100%;
+  height: 100%;
+  min-height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  overflow: scroll;
+  > div {
+    text-align: center;
+    width: 90%;
+    margin-bottom: 1.5rem;
+  }
+  .Date {
+    height: 10%;
+  }
+  .EventName {
+    height: 10%;
+  }
+  .HostName {
+    height: 10%;
+  }
+  .EventInfo {
+    height: 45%;
+  }
+  .Participants {
+    height: 20%;
+  }
+  .SignUp {
+    height: 5%;
+  }
+  .ParticiapntsCheck {
+    height: auto;
+  }
+}
+.SignUpForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.589);
+}
+.FormContainer {
+  height: 80%;
+  width: 90%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem;
+  > button {
+    width: 30%;
+  }
+  > div,
+  p {
+    width: 100%;
+  }
+  .FormSelection {
+    text-align: left;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+  > p {
+    height: 50%;
+    overflow: scroll;
+  }
+}
