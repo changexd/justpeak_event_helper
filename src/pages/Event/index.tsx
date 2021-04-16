@@ -1,6 +1,7 @@
-import {useRouteMatch, Switch, Route} from 'react-router-dom';
-import EventPage from './EventPage';
+import { useRouteMatch, Switch, Route } from 'react-router-dom';
+import React from 'react';
 import * as uuid from 'uuid';
+import EventPage from './EventPage';
 
 interface IEventTag {
   EventTagEng: string;
@@ -18,30 +19,29 @@ interface IEventInfo {
 }
 
 function EventItem(prop: IEventInfo) {
-  //TODO Add Event link button
+  // TODO Add Event link button
   const DateString = prop.EventDate.toDateString().split(' ');
   return (
-    <div className='EventItem'>
+    <div className="EventItem">
       {prop.EventDate > prop.NowDate ? (
         <div>
-          <button>SignUp</button>
-          <p className='ThisWeek'>Event This week</p>
-          <p className='Date'>
+          <button type="button">SignUp</button>
+          <p className="ThisWeek">Event This week</p>
+          <p className="Date">
             {DateString[1]}.{DateString[2]} ({DateString[0]})
           </p>
-          <h2 className='EventName'>{prop.EventName}</h2>
-          <h2 className='HostName'>{prop.HostName}</h2>
-          <p className='More'>more..</p>
+          <h2 className="EventName">{prop.EventName}</h2>
+          <h2 className="HostName">{prop.HostName}</h2>
+          <p className="More">more..</p>
         </div>
       ) : (
         <div>
-          <p className='Date'>
+          <p className="Date">
             {DateString[1]}.{DateString[2]} ({DateString[0]})
           </p>
-          <h2 className='EventName'>{prop.EventName}</h2>
-          <h2 className='HostName'>{prop.HostName}</h2>
-
-          <p className='More'>more..</p>
+          <h2 className="EventName">{prop.EventName}</h2>
+          <h2 className="HostName">{prop.HostName}</h2>
+          <p className="More">more..</p>
         </div>
       )}
     </div>
@@ -49,7 +49,8 @@ function EventItem(prop: IEventInfo) {
 }
 
 export default function Events() {
-  const {path, url} = useRouteMatch();
+  const { path, url } = useRouteMatch();
+  console.log(url);
   const nowDate = new Date();
   const data = [
     {
@@ -59,7 +60,7 @@ export default function Events() {
       Week: 2,
       IsCancel: false,
       HostName: 'Darren',
-      EventTags: [{EventTagEng: 'gay', EventTagZht: 'gay'}],
+      EventTags: [{ EventTagEng: 'gay', EventTagZht: 'gay' }],
     },
     {
       EventId: 1,
@@ -68,7 +69,7 @@ export default function Events() {
       Week: 2,
       IsCancel: false,
       HostName: 'Darren',
-      EventTags: [{EventTagEng: 'gay', EventTagZht: 'gay'}],
+      EventTags: [{ EventTagEng: 'gay', EventTagZht: 'gay' }],
     },
     {
       EventId: 1,
@@ -77,7 +78,7 @@ export default function Events() {
       Week: 2,
       IsCancel: false,
       HostName: 'Darren',
-      EventTags: [{EventTagEng: 'gay', EventTagZht: 'gay'}],
+      EventTags: [{ EventTagEng: 'gay', EventTagZht: 'gay' }],
     },
     {
       EventId: 1,
@@ -86,7 +87,7 @@ export default function Events() {
       Week: 2,
       IsCancel: false,
       HostName: 'Darren',
-      EventTags: [{EventTagEng: 'gay', EventTagZht: 'gay'}],
+      EventTags: [{ EventTagEng: 'gay', EventTagZht: 'gay' }],
     },
     {
       EventId: 1,
@@ -95,10 +96,10 @@ export default function Events() {
       Week: 2,
       IsCancel: false,
       HostName: 'Darren',
-      EventTags: [{EventTagEng: 'gay', EventTagZht: 'gay'}],
+      EventTags: [{ EventTagEng: 'gay', EventTagZht: 'gay' }],
     },
   ];
-  const EventList = data.map((event, index) => {
+  const EventList = data.map((event) => {
     return (
       <EventItem
         NowDate={nowDate}
@@ -118,7 +119,7 @@ export default function Events() {
       {' '}
       <Switch>
         <Route exact path={path}>
-          <div className='Event'>{EventList}</div>
+          <div className="Event">{EventList}</div>
         </Route>
         <Route path={`${path}/:EventId`}>
           <EventPage />

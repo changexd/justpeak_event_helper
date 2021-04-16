@@ -1,7 +1,7 @@
-import axios, {AxiosResponse} from 'axios';
-import {AxiosHandler} from '../utilities/AxiosHandler';
-const url =
-process.env.REACT_APP_MODE == 'DEV'
+import { AxiosResponse } from 'axios';
+import { AxiosHandler } from '../utilities/AxiosHandler';
+
+const url = process.env.REACT_APP_MODE == 'DEV'
   ? `${process.env.REACT_APP_DEVHOST}/admin`
   : `${process.env.REACT_APP_PRODHOST}/admin`;
 
@@ -25,7 +25,7 @@ export interface IEditEvent{
   PassCode?: string;
   EventLocation?:string;
 }
-interface IAdminAPI  {
+interface IAdminAPI {
   CreateEvent:<T>(arg:T)=>Promise<AxiosResponse<any>>;
   DeleteEvent:(arg:number)=>Promise<AxiosResponse<any>>;
   CancelEvent:(arg:number)=>Promise<AxiosResponse<any>>;
@@ -33,23 +33,23 @@ interface IAdminAPI  {
   FindMember:(arg:string)=>Promise<AxiosResponse<any>>;
   GetMembers:(arg:number)=>Promise<AxiosResponse<any>>;
 }
-const AdminAPI :IAdminAPI ={
-  CreateEvent:async <INewEvent>(item:INewEvent)=>{
-    return await AxiosHandler('POST',`${url}/CreateEvent`,item,true);
+const AdminAPI :IAdminAPI = {
+  CreateEvent: async <INewEvent>(item:INewEvent) => {
+    return await AxiosHandler('POST', `${url}/CreateEvent`, item, true);
   },
-  DeleteEvent: async (EventId:number)=>{
-    return await AxiosHandler('DELETE',`${url}/DeleteEvent?EventId=${EventId}`,true);
+  DeleteEvent: async (EventId:number) => {
+    return await AxiosHandler('DELETE', `${url}/DeleteEvent?EventId=${EventId}`, true);
   },
-  CancelEvent:async (EventId:number)=>{
-    return await AxiosHandler('POST',`${url}/CancelEvent?EventId=${EventId}`,true)
+  CancelEvent: async (EventId:number) => {
+    return await AxiosHandler('POST', `${url}/CancelEvent?EventId=${EventId}`, true);
   },
-  EditEvent : async <IEditEvent>(item:IEditEvent)=>{
-    return await AxiosHandler('POST',`${url}/EditEvent`,item,true);
+  EditEvent: async <IEditEvent>(item:IEditEvent) => {
+    return await AxiosHandler('POST', `${url}/EditEvent`, item, true);
   },
-  FindMember: async (MemberName:string)=>{
-    return await AxiosHandler('POST',`${url}/FindMember?MemberName=${MemberName}`,true);
+  FindMember: async (MemberName:string) => {
+    return await AxiosHandler('POST', `${url}/FindMember?MemberName=${MemberName}`, true);
   },
-  GetMembers: async(page:number)=>{
-    return await AxiosHandler('GET',`${url}/GetMembers=${page}`,true);
+  GetMembers: async (page:number) => {
+    return await AxiosHandler('GET', `${url}/GetMembers=${page}`, true);
   }
-}
+};
