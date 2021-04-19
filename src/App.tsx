@@ -4,6 +4,8 @@ import './App.css';
 import LogIn from './pages/Login';
 import Events from './pages/Event';
 import Header from './shared/Header';
+import MyPage from './pages/MyPage';
+import Admin from './pages/Admin';
 
 const App = () => {
   return (
@@ -19,6 +21,16 @@ const App = () => {
           <Route path="/events">
             <Header title="Events">
               <Events />
+            </Header>
+          </Route>
+          <Route path="/mypage">
+            <Header title="My Page">
+              <MyPage />
+            </Header>
+          </Route>
+          <Route path="/admin">
+            <Header title="Admins">
+              <Admin />
             </Header>
           </Route>
         </Switch>

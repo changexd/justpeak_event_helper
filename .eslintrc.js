@@ -24,6 +24,10 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
+    'no-shadow': 0,
+    '@typescript-eslint/no-shadow': ['error'],
+    'no-unused-vars': 0,
+    '@typescript-eslint/no-unused-vars': ['error'],
     'arrow-body-style': 0,
     'array-callback-return': 0,
     'operator-assignment': 0,

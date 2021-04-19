@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { AxiosHandler } from '../utilities/AxiosHandler';
 
 const url = process.env.REACT_APP_MODE == 'DEV'
@@ -9,8 +9,8 @@ interface IEventAPI {
   GetThisWeek:(arg: string)=>Promise<AxiosResponse<any>>;
   GetEventInfo:(arg:number, FBId:string)=>Promise<AxiosResponse<any>>;
   GetEvents:(arg:number)=>Promise<AxiosResponse<any>>;
-  SignUpEvent:<T>(arg:T)=>Promise<AxiosResponse<any>>;
-  UpdatePaymentStatus:<T>(arg:T)=>Promise<AxiosResponse<any>>;
+  SignUpEvent:(arg:ISignUpEvent)=>Promise<AxiosResponse<any>>;
+  UpdatePaymentStatus:(arg:IUpdatePaymentStatus)=>Promise<AxiosResponse<any>>;
 
 }
 interface ISignUpEvent{
@@ -39,18 +39,18 @@ interface IUpdatePaymentStatus{
 
 export const EventAPI:IEventAPI = {
   GetThisWeek: async (date:string) => {
-    return await AxiosHandler('GET', `${url}/GetThisWeek/${date}`, false);
+    return AxiosHandler('GET', `${url}/GetThisWeek/${date}`, false);
   },
   GetEventInfo: async (EventId:number, FBId:string) => {
-    return await AxiosHandler('GET', `${url}/${EventId}?FBId=${FBId}`, true);
+    return AxiosHandler('GET', `${url}/${EventId}?FBId=${FBId}`, true);
   },
   GetEvents: async (page:number) => {
-    return await AxiosHandler('GET', `${url}/GetEvents?page=${page}`, true);
+    return AxiosHandler('GET', `${url}/GetEvents?page=${page}`, true);
   },
-  SignUpEvent: async<ISignUpEvent>(item:ISignUpEvent) => {
-    return await AxiosHandler('POST', `${url}/SignUpEvent`, item, true);
+  SignUpEvent: async (item:ISignUpEvent) => {
+    return AxiosHandler('POST', `${url}/SignUpEvent`, item, true);
   },
-  UpdatePaymentStatus: async<IUpdatePaymentStatus>(item:IUpdatePaymentStatus) => {
-    return await AxiosHandler('POST', `${url}/UpdatePaymentStatus`, item, true);
+  UpdatePaymentStatus: async (item:IUpdatePaymentStatus) => {
+    return AxiosHandler('POST', `${url}/UpdatePaymentStatus`, item, true);
   }
 };
