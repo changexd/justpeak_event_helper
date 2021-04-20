@@ -1,6 +1,29 @@
-export default function CreateEvent() {
+function HostInfo() {
   return (
     <div>
+      <p className="HostId">Id</p>
+      <p className="HostFB">FBName</p>
+      <p className="HostEng">EngName</p>
+      <p className="HostZht">ZhtName</p>
+    </div>
+  );
+}
+
+export default function CreateEvent() {
+  const findHost = false;
+  return (
+    <div>
+      {findHost ? (
+        <div className="NewEvent__FindHost">
+          <form>
+            <div><input type="text" /></div>
+            <button type="submit">FindHost</button>
+          </form>
+          <div><HostInfo /><HostInfo /><HostInfo /><HostInfo /></div>
+        </div>
+      ) : (
+        ''
+      )}
       <form className="NewEvent">
         <div className="NewEvent__EventName">
           <label>EventName</label>
@@ -38,8 +61,13 @@ export default function CreateEvent() {
           </div>
         </div>
         <div className="NewEvent__EventInfo">
-          <label htmlFor="EventInfo"> sda</label>
-          <span id="EventInfo" aria-label="EventInfo" role="textbox" contentEditable />
+          <label htmlFor="EventInfo">Info</label>
+          <span
+            id="EventInfo"
+            aria-label="EventInfo"
+            role="textbox"
+            contentEditable
+          />
         </div>
         <button type="submit">Create Event</button>
       </form>

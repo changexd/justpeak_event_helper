@@ -6,6 +6,7 @@ import Events from './pages/Event';
 import Header from './shared/Header';
 import MyPage from './pages/MyPage';
 import Admin from './pages/Admin';
+import 'draft-js/dist/Draft.css';
 
 const App = () => {
   return (
