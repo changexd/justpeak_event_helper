@@ -1,4 +1,5 @@
-export default{}// import {useState} from 'react';
+export default {};
+// import {useState} from 'react';
 // import {IParticipant} from '../../models/models';
 
 // function useParticipants(initialVal: Array<IParticipant>) {

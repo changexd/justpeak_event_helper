@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import FacebookLogin from 'react-facebook-login';
+import { MemberAPI } from '../../service/api/MemberAPI';
 import { AuthContext } from '../../shared/contexts/authContext';
-import { FBLogin } from '../../service/api/FBLogin';
 import { useForm } from '../../shared/hooks/useForm';
 // import {IEvent, login_status} from '../models/models';
 
@@ -34,7 +34,7 @@ function RegisterForm({ setAuth }: any) {
       className="Register"
       onSubmit={async (evt) => {
         evt.preventDefault();
-        const result = await FBLogin.CreateMember(memberInfo);
+        const result = await MemberAPI.CreateMember(memberInfo);
         if (result.status === 200) {
           setAuth(true);
         }
@@ -81,7 +81,7 @@ function LogIn() {
   // const {hostInfo, setHostInfo} = useContext(HostContext);
   // const {CreateMember, CheckMember} = FB_Login;
 
-  const [showRegister] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
 
   // TODO add useEffect to check Login at first
   // console.log(status);
@@ -101,10 +101,21 @@ function LogIn() {
       </div>
       <div className="Login__LoginWithFB">
         <FacebookLogin
-          appId="2218447721622502"
+          onClick={(evt) => {
+            evt.preventDefault();
+            FB.getLoginStatus((res) => {
+              if (res.status === 'connected') {
+                const result = MemberAPI.CheckMember(res.authResponse.userID);
+                result.then((data) => { if (data.status === 200) { setAuth(true); } else { setShowRegister(true); } });
+              }
+            });
+          }}
           autoLoad
-          callback={() => {
-            console.log('');
+          appId="2218447721622502"
+          callback={(res:any) => {
+            console.log(res);
+            const result = MemberAPI.CheckMember(res.id);
+            result.then((data) => { if (data.status === 200) { setAuth(true); } else { setShowRegister(true); } });
           }}
         />
       </div>

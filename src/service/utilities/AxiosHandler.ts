@@ -1,20 +1,20 @@
-import axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios';
+import axios, { AxiosResponse, Method } from 'axios';
 
-export function AxiosHandler(action:Method, url:string, data:any, withCredentials:boolean): Promise<AxiosResponse<any>>|any
-export function AxiosHandler(action:Method, url:string, withCredentials:boolean): Promise<AxiosResponse<any>>|any
+export async function AxiosHandler<T = any>(action:Method, url:string, data:any, withCredentials:boolean): Promise<AxiosResponse<T>>
+export async function AxiosHandler<T = any>(action:Method, url:string, withCredentials:boolean): Promise<AxiosResponse<T>>
 
-export async function AxiosHandler(action:Method, url:string, data?:any, withCredentials = true) {
+export async function AxiosHandler<T = any>(action:Method, url:string, data:any, withCredentials = true) {
   try {
-    if (data == null) {
-      const response = await axios({ method: action, url: url, withCredentials: withCredentials });
+    if (data === undefined) {
+      const response : AxiosResponse<T> = await axios({ method: action, url: url, withCredentials: withCredentials });
       return response;
     } else {
-      const response = await axios({
+      const response : AxiosResponse<T> = await axios({
         method: action, url: url, data: data, withCredentials: withCredentials
       });
+      return response;
     }
   } catch (err) {
-    console.log(err);
-    return err.statusCode;
+    return err;
   }
 }
