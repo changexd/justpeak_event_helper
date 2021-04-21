@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './shared/contexts/authContext';
+import { StatusProvider } from './shared/contexts/statusContext';
 
 function FBinit() {
   return new Promise((resolve) => {
@@ -37,9 +38,9 @@ function startApp() {
   ReactDOM.render(
     <React.StrictMode>
       <AuthProvider>
-        {/* <StatusProvider> */}
-        <App />
-        {/* </StatusProvider> */}
+        <StatusProvider>
+          <App />
+        </StatusProvider>
       </AuthProvider>
     </React.StrictMode>,
     document.getElementById('root')
