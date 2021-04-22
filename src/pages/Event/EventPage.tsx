@@ -1,7 +1,18 @@
+import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { EventAPI } from '../../service/api/EventAPI';
+import { StatusContext } from '../../shared/contexts/statusContext';
+import { IEventInfo } from '../../shared/models/EventInterfaces';
 
 export default function EventPage() {
+  const { status } = useContext(StatusContext);
   const { EventId } = useParams<{EventId: string}>();
+  const [eventInfo, setEventInfo] = useState<IEventInfo>({} as IEventInfo);
+  const dateString = new Date(eventInfo.EventDate).toDateString().split(' ');
+  useEffect(() => {
+    EventAPI.GetEventInfo(EventId, status.MemberId).then((response) => { setEventInfo(response.data); });
+  }, []);
+  console.log(eventInfo);
   // TODO Logic here use custom hook to change info
   const Signup = false;
   const confirmSignup = false;
@@ -54,28 +65,13 @@ export default function EventPage() {
       ) : (
         ''
       )}
-      <div className="Date">Apr.10 (fri)</div>
-      <div className="EventName">How to make people happy</div>
-      <div className="HostName">Host : Johnson</div>
+      <div className="Date">{dateString[1]}.{dateString[2]} ({dateString[0]})</div>
+      <div className="EventName">{eventInfo.EventName}</div>
+      <div className="HostName">Host : {eventInfo.HostName}</div>
       <div className="EventInfo">
-        {' '}
-        Contrary to popular belief, Lorem Ipsum is not simply random text. It
-        has roots in a piece of classical Latin literature from 45 BC, making it
-        over 2000 years old. Richard McClintock, a Latin professor at
-        Hampden-Sydney College in Virginia, looked up one of the more obscure
-        Latin words, consectetur, from a Lorem Ipsum passage, and going through
-        the cites of the word in classical literature, discovered the
-        undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33
-        of &#34de Finibopular during the Renaissance. The first line of Lorem
-        Ipsum,&#34Lorem ipsum dolor sit amet..&#34,in a piece of classical Latin
-        literature from 45 BC, making it over 2000 years old. Richapsum used
-        since the 1500s is reproduced below for those interested. Sections 1.10
-        .32 and 1.10.33 from &#34de Finibus Bonorum et Malorum&#34 by Cicero are also
-        reproduced in their exact original form,nterested. Sections 1.10 .32 and
-        1.10.33 from &#34de Finibus Bonorum et Malorum&#34 by Cicero are also
-        reproduced in their exact original form, accompanied by English versions
-        from the 1914 translation by H. Rackham.
+        {eventInfo.EventInfo}
       </div>
+      {/* TODO Implement Participants */}
       <div className="Participants">Participants</div>
       <div className="ParticiapntsCheck" />
       <div>
