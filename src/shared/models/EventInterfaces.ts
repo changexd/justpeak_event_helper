@@ -2,11 +2,12 @@ import { AxiosResponse } from 'axios';
 import { IParticipantLanding, IPayment } from './ParticipantInterfaces';
 
 export interface IEventAPI {
-  GetThisWeek:(arg: string)=>Promise<AxiosResponse<any>>;
-  GetEventInfo:(arg:string, FBId:string)=>Promise<AxiosResponse<any>>;
-  GetEvents:(arg:number)=>Promise<AxiosResponse<any>>;
-  SignUpEvent:(arg:ISignUpEvent)=>Promise<AxiosResponse<any>>;
-  UpdatePaymentStatus:(arg:IUpdatePaymentStatus)=>Promise<AxiosResponse<any>>;
+  GetThisWeek:<T = any>(arg: string)=>Promise<AxiosResponse<T>>;
+  GetEventInfo:<T = any>(arg:string, FBId:string)=>Promise<AxiosResponse<T>>;
+  GetEvents:<T = any>(arg:number)=>Promise<AxiosResponse<Array<T>>>;
+  GetMyStatus:<T = any>(arg1:string, arg2:string)=>Promise<AxiosResponse<T>>
+  SignUpEvent:<T = any>(arg:ISignUpEvent)=>Promise<AxiosResponse<T>>;
+  UpdatePaymentStatus:<T = any>(arg:IUpdatePaymentStatus)=>Promise<AxiosResponse<T>>;
 
 }
 export interface IEventBase {
@@ -16,11 +17,14 @@ export interface IEventBase {
   EventDate:Date,
 }
 export interface ISignUpEvent{
+  [key:string]:any,
   MemberId:string,
   IsComing:boolean,
   IsCancel:boolean,
   EventId:number,
-  PaidMethod:string
+  PaidMethod:string,
+  PaidAccount?:string
+
 }
 export interface IEventInfo extends IEventBase{
   HostName:string,

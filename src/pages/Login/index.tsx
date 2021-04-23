@@ -5,11 +5,12 @@ import { MemberAPI } from '../../service/api/MemberAPI';
 import { AuthContext } from '../../shared/contexts/authContext';
 import { useForm } from '../../shared/hooks/useForm';
 import { IEventThisWeek } from '../../shared/models/EventInterfaces';
+import { ICreateMember } from '../../shared/models/MemberInterfaces';
 // import {IEvent, login_status} from '../models/models';
 
 function RegisterForm({ setAuth }: any) {
   // type memberInfo
-  const [memberInfo, SetMemberInfo] = useForm({});
+  const [memberInfo, SetMemberInfo] = useForm<ICreateMember>({} as ICreateMember);
   useEffect(() => {
     FB.api(
       '/me',
@@ -22,7 +23,7 @@ function RegisterForm({ setAuth }: any) {
         } = response;
         SetMemberInfo('Email', email);
         SetMemberInfo('MemberId', id);
-        SetMemberInfo('FbLink', link);
+        SetMemberInfo('FBLink', link);
         SetMemberInfo('NameFb', name);
 
         // if result is goood set auth
@@ -100,7 +101,7 @@ function LogIn() {
     const daysTillSat = day == 6 ? 7 : 6 - day;
     now.setDate(date + daysTillSat);
     now.setHours(23, 59, 59);
-    EventAPI.GetThisWeek(now.toISOString()).then((response) => setEventThisWeek(response.data));
+    EventAPI.GetThisWeek(now.toISOString()).then((response) => { if (response.data) { setEventThisWeek(response.data); } });
   }, []);
   // parse XFBML to the page
   const thisWeekEvents = eventThisWeek.length < 1 ? '' : eventThisWeek.map((event) => {

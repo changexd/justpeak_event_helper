@@ -17,9 +17,11 @@ export interface IMemberAPI {
 }
 
 export interface ICreateMember {
+  [key:string]:string;
   Email:string;
   MemberId:string;
   NameFb:string;
   NameEng:string;
   NameZht:string;
+  FBLink:string;
 }
