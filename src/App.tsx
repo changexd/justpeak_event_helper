@@ -41,6 +41,7 @@ const App = () => {
   const { auth, setAuth } = useContext(AuthContext);
   const { setStatus } = useContext(StatusContext);
   useEffect(() => {
+    // console.log('auth state changed');
     const LoginStatus :any = new Promise((resolve, reject) => {
       FB.getLoginStatus((res) => {
         if (res.status === 'connected') {
@@ -56,7 +57,7 @@ const App = () => {
     LoginStatus
       .then((res:any) => { return MemberAPI.LoginMember<IStatus>(res.id, res.email); })
       .then((res:any) => { if (res.status === 200) { setStatus(res.data); setAuth(true); } else { setAuth(false); } });
-  }, []);
+  }, [auth]);
 
   return (
     <Router>

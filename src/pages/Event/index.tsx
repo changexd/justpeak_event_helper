@@ -42,7 +42,7 @@ export default function Events() {
   const [page, setPage] = useState(0);
   // console.log(eventList);
   useEffect(() => {
-    EventAPI.GetEvents(page).then((response) => { setEventList([...eventList, ...response.data]); });
+    EventAPI.GetEvents(page).then((response) => { if (response.data) { setEventList([...eventList, ...response.data]); } });
   }, [page]);
   const { path } = useRouteMatch();
   // console.log(url);
@@ -75,7 +75,9 @@ export default function Events() {
           </div>
         </Route>
         <Route path={`${path}/:EventId`}>
-          <EventPage />
+          <div className="Event">
+            <EventPage />
+          </div>
         </Route>
       </Switch>
     </div>

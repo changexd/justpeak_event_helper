@@ -1,82 +1,107 @@
 import { useEffect, useState, useContext } from 'react';
+import * as uuid from 'uuid';
 import { useParams } from 'react-router-dom';
 import { EventAPI } from '../../service/api/EventAPI';
 import { StatusContext } from '../../shared/contexts/statusContext';
 import { IEventInfo } from '../../shared/models/EventInterfaces';
+import SignUpForm from './components/SignUpForm';
 
 export default function EventPage() {
   const { status } = useContext(StatusContext);
   const { EventId } = useParams<{EventId: string}>();
   const [eventInfo, setEventInfo] = useState<IEventInfo>({} as IEventInfo);
-  const dateString = new Date(eventInfo.EventDate).toDateString().split(' ');
+  const [formType, setFormType] = useState('');
+  const [confirmForm, setConfirmForm] = useState(false);
+  const EventDate = new Date(eventInfo.EventDate);
+  const currentDate = new Date();
+  const dateString = EventDate.toDateString().split(' ');
+  const myInfo = eventInfo.Participants
+    ? eventInfo.Participants.filter((p) => p.MemberId === status.MemberId) : [];
+  console.log(myInfo);
   useEffect(() => {
-    EventAPI.GetEventInfo(EventId, status.MemberId).then((response) => { setEventInfo(response.data); });
-  }, []);
-  console.log(eventInfo);
+    EventAPI.GetEventInfo<IEventInfo>(EventId, status.MemberId).then((response) => { setEventInfo(response.data); });
+  }, [confirmForm]);
+  // console.log(eventInfo);
   // TODO Logic here use custom hook to change info
-  const Signup = false;
-  const confirmSignup = false;
-  console.log(EventId);
+  console.log(eventInfo);
   return (
-    <div className="EventPage">
-      {Signup ? (
-        confirmSignup ? (
-          <span className="SignUpForm">
-            <div className="FormContainer">
-              <p>Successfully Signed Up!</p>
-              <p>Check out event page for Room Password!</p>
-            </div>
-          </span>
-        ) : (
-          <form className="SignUpForm">
-            <div className="FormContainer">
-              <div className="FormSelection">
-                <p>I want to pay by:</p>
-                <span>
-                  <input type="checkbox" />
-                  <label>Pay by cash to host</label>
-                </span>
-                <span>
-                  <input type="checkbox" />
-                  <label>Pay by money transfer</label>
-                </span>
-              </div>
-              <p>
-                Contrary to popular belief, Lorem Ipsum is not simply random
-                text. It has roots in a piece of classical Latin literature from
-                45 BC, making it over 2000 years old. Richard McClintock, a
-                Latin professor at Hampden-Sydney College in Virginia, looked up
-                one of the more obscure Latin words, consectetur, from a Lorem
-                Ipsum passage, and going through the cites of the word in
-                classical literature, discovered the undoubtable source. Lorem
-                Ipsum comes from sections 1.10.32 and 1.10.33 of &#34 de Finibopular
-                during the Renaissance. The first line of Lorem Ipsum, &#34Lorem
-                ipsum dolor sit amet..&#34,in a piece of classical Latin literature
-                from 45 BC, making it over
-              </p>
-              <span>
-                <input type="checkbox" />
-                <label>I Agree, and will follow the rules</label>
+    eventInfo.EventId
+      ? (
+        <div className="EventPage">
+          {formType === 'signUp' ? (
+            confirmForm ? (
+              <span className="SignUpForm" onClick={() => { setConfirmForm(false); setFormType(''); }}>
+                <div className="FormContainer">
+                  <p>Successfully Signed Up!</p>
+                  <p>Check out event page for Room Password!</p>
+                </div>
               </span>
-              <button type="submit">SignUp</button>
-            </div>
-          </form>
-        )
-      ) : (
-        ''
-      )}
-      <div className="Date">{dateString[1]}.{dateString[2]} ({dateString[0]})</div>
-      <div className="EventName">{eventInfo.EventName}</div>
-      <div className="HostName">Host : {eventInfo.HostName}</div>
-      <div className="EventInfo">
-        {eventInfo.EventInfo}
-      </div>
-      {/* TODO Implement Participants */}
-      <div className="Participants">Participants</div>
-      <div className="ParticiapntsCheck" />
-      <div>
-        <button className="SignUp" type="button"> SignUp</button>
-      </div>
-    </div>
-  );
+            ) : (
+              <SignUpForm
+                key={uuid.v4()}
+                status={status}
+                EventId={EventId}
+                setConfirmForm={setConfirmForm}
+                EventDate={EventDate}
+                formType={formType}
+                currentDate={currentDate}
+              />
+            )
+          ) : (
+            ''
+          )}
+          {formType === 'cancel' ? (
+            confirmForm ? (
+              <span className="SignUpForm" onClick={() => { setConfirmForm(false); setFormType(''); }}>
+                <div className="FormContainer">
+                  <p>Successfully Cancelled!</p>
+                  <p>Check out for future Events!</p>
+                </div>
+              </span>
+            ) : (
+              <SignUpForm
+                key={uuid.v4()}
+                status={status}
+                EventId={EventId}
+                setConfirmForm={setConfirmForm}
+                EventDate={EventDate}
+                formType={formType}
+                currentDate={currentDate}
+              />
+            )
+          ) : (
+            ''
+          )}
+          <div className="Date">{dateString[1]}.{dateString[2]} ({dateString[0]})</div>
+          <div className="EventName">{eventInfo.EventName}</div>
+          <div className="HostName">Host : {eventInfo.HostName}</div>
+          <div className="EventInfo">
+            {eventInfo.EventInfo}
+          </div>
+          {/* TODO Implement Participants */}
+          <div className="Participants">
+            {eventInfo.Participants.map((participant) => {
+              if (participant.IsCancel !== true && participant.IsComing === true) {
+                return <div>{participant.ParticipantName}</div>;
+              }
+            })}
+          </div>
+          <div className="ParticiapntsCheck" />
+          <div>
+            {currentDate > EventDate
+              ? <div>The Event is already finished</div>
+              : myInfo.length > 0 && myInfo[0].IsComing == true
+                ? (
+                  <div>
+                    <button type="button" onClick={() => setFormType('signUp')}>EditPayment</button>
+                    <button type="button" onClick={() => setFormType('cancel')}>Cancel</button>
+                  </div>
+                )
+                : myInfo.length > 0 && myInfo[0].IsCancel === true
+                  ? <p> You already canceled this Event, you may not rejoin</p>
+                  : <button type="button" onClick={() => setFormType('signUp')}>SignUp</button>}
+          </div>
+        </div>
+      )
+      : <div />);
 }
