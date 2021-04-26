@@ -1,3 +1,7 @@
+## 0.20 (April 26, 2021)
+- ### Added 
+Event can now be signed up by regular participants with cancel and edit payment method
+
 ## 0.10 (April 13, 2021)
 - ### Added 
 added API into Service folder

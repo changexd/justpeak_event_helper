@@ -75,7 +75,9 @@ export default function Events() {
           </div>
         </Route>
         <Route path={`${path}/:EventId`}>
-          <EventPage />
+          <div className="Event">
+            <EventPage />
+          </div>
         </Route>
       </Switch>
     </div>
