@@ -8,6 +8,8 @@ export interface IParticipantLanding extends IParticipantBase{
   ParticipantName :string
 }
 export interface IPayment extends IParticipantBase {
+  NameEng:string,
+  NameFb:string,
   EventId:number,
   PaidMethod:string,
   PaidNote:string,
