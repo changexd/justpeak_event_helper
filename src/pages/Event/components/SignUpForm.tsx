@@ -3,12 +3,13 @@ import { EventAPI } from '../../../service/api/EventAPI';
 import { useForm } from '../../../shared/hooks/useForm';
 import { ISignUpEvent } from '../../../shared/models/EventInterfaces';
 import { IStatus } from '../../../shared/models/MemberInterfaces';
+import { IParticipantLanding } from '../../../shared/models/ParticipantInterfaces';
 
 export default function SignUpForm({
-  status, EventId, setConfirmForm, formType, EventDate, currentDate
+  status, EventId, setConfirmForm, formType, EventDate, currentDate, myInfo
 }
   :{status:IStatus, EventId:string, setConfirmForm:React.Dispatch<boolean>, formType:string,
-    EventDate:Date, currentDate:Date}) {
+    EventDate:Date, currentDate:Date, myInfo:IParticipantLanding[]}) {
   const [myStatus, setMyStatus] = useForm<ISignUpEvent>({} as ISignUpEvent);
   const [agree, setAgree] = useState(false);
   useEffect(() => {
@@ -112,7 +113,7 @@ export default function SignUpForm({
         </span>
         <button type="submit" disabled={!agree}>
           {formType === 'signUp'
-            ? myStatus.IsComing === true
+            ? myInfo[0].IsComing === true
               ? 'Change Method' : 'SignUp'
             : 'Cancel'}
         </button>

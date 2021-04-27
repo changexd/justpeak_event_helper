@@ -24,6 +24,6 @@ export const EventAPI:IEventAPI = {
     return AxiosHandler('POST', `${url}/SignUpEvent`, item, true);
   },
   UpdatePaymentStatus: async (item:IUpdatePaymentStatus) => {
-    return AxiosHandler('POST', `${url}/UpdatePaymentStatus`, item, true);
+    return AxiosHandler('PUT', `${url}/UpdatePaymentStatus`, item, true);
   }
 };

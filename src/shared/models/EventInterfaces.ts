@@ -11,7 +11,7 @@ export interface IEventAPI {
 
 }
 export interface IEventBase {
-  EventId:number,
+  EventId:string,
   EventName:string,
   Week:number,
   EventDate:Date,
@@ -27,6 +27,7 @@ export interface ISignUpEvent{
 
 }
 export interface IEventInfo extends IEventBase{
+  HostId:string,
   HostName:string,
   EventInfo:string,
   ParticipantNumberExpected :number,
@@ -56,7 +57,6 @@ export interface IEventThisWeek extends IEventBase {
   HostName:string
 }
 export interface IUpdatePaymentStatus{
-  EventId:number,
-  ParticipantNumber:number,
+  EventId:string,
   PaymentList:Array<IPayment>;
 }
