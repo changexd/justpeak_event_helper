@@ -1,3 +1,7 @@
+## 0.30 (April 26, 2021)
+- ### Added 
+EventPage now is working
+
 ## 0.20 (April 26, 2021)
 - ### Added 
 Event can now be signed up by regular participants with cancel and edit payment method
