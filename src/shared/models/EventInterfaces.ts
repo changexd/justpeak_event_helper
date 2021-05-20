@@ -8,7 +8,19 @@ export interface IEventAPI {
   GetMyStatus:<T = any>(arg1:string, arg2:string)=>Promise<AxiosResponse<T>>
   SignUpEvent:<T = any>(arg:ISignUpEvent)=>Promise<AxiosResponse<T>>;
   UpdatePaymentStatus:<T = any>(arg:IUpdatePaymentStatus)=>Promise<AxiosResponse<T>>;
-
+  GetHistoryEventParticipant:<T = any>(id:string)=>Promise<AxiosResponse<T>>;
+  GetHistoryEventHost:<T = any>(id:string)=>Promise<AxiosResponse<T>>;
+}
+export interface IHistoryEventParticipant extends IEventBase{
+  Paid:boolean,
+  IsCancel:boolean,
+  ParticipantNumber:number,
+  EventTages:Array<IEventTag>
+}
+export interface IHistoryEventHost extends IEventBase{
+  IsCancel:boolean,
+  ParticipantNumber:number,
+  EventTages:Array<IEventTag>
 }
 export interface IEventBase {
   EventId:string,
@@ -55,6 +67,7 @@ export interface IEventThisWeek extends IEventBase {
   EventInfo:string,
   EventTags: Array<IEventTag>,
   HostName:string
+  HostId:string,
 }
 export interface IUpdatePaymentStatus{
   EventId:string,

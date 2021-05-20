@@ -31,48 +31,50 @@ function RegisterForm({ setAuth }: any) {
       },
     );
   }, []);
-
+  console.log(setAuth);
   return (
     <form
-      className="Register"
+      className="h-full w-full bg-black bg-opacity-80 absolute top-0 left-0 z-10 flex flex-col justify-center items-center"
       onSubmit={async (evt) => {
         evt.preventDefault();
-        const result = await MemberAPI.CreateMember(memberInfo);
-        if (result.status === 200) {
-          setAuth(true);
-        }
+        MemberAPI.CreateMember(memberInfo).then((response) => { SetMemberInfo('Email', response); });
         // send data to backend and if success set auth
       }}
     >
-
-      <div className="Register__Form">
-        <div>
-          <label htmlFor="Email">Email</label>
-          <input id="Email" defaultValue={memberInfo.Email} />
+      <div className="container h-4/6 w-10/12 rounded-3xl bg-white border-4 border-grey flex flex-col justify-around items-center">
+        <h2 className="border-b-2 p-2">Please Enter your Information</h2>
+        <div className="h-auto w-5/6 space-y-2">
+          <div className="flex flex-col space-y-3 w-full">
+            <label htmlFor="Email">Email</label>
+            <input type="email" className="rounded" id="Email" defaultValue={memberInfo.Email} />
+          </div>
+          <div className="flex flex-col space-y-3 w-full">
+            <label htmlFor="NameEng">English Name</label>
+            <input
+              className="rounded"
+              type="text"
+              id="NameEng"
+              onChange={(evt) => {
+                SetMemberInfo(evt.target.id, evt.target.value);
+                console.log(memberInfo);
+              }}
+            />
+          </div>
+          <div className="flex flex-col space-y-3 w-full ">
+            <label htmlFor="NameZht"> Chinese Name</label>
+            <input
+              className="rounded"
+              type="text"
+              id="NameZht"
+              onChange={(evt) => {
+                SetMemberInfo(evt.target.id, evt.target.value);
+                console.log(memberInfo);
+              }}
+            />
+          </div>
         </div>
-        <div>
-          <label htmlFor="NameEng">English Name</label>
-          <input
-            id="NameEng"
-            onChange={(evt) => {
-              SetMemberInfo(evt.target.id, evt.target.value);
-              console.log(memberInfo);
-            }}
-          />
-          {' '}
-        </div>
-        <div>
-          <label htmlFor="NameZht"> Chinese Name</label>
-          <input
-            id="NameZht"
-            onChange={(evt) => {
-              SetMemberInfo(evt.target.id, evt.target.value);
-              console.log(memberInfo);
-            }}
-          />
-        </div>
+        <button className="h-12 w-1/2 bg-yellow rounded-lg border-2 border-grey" type="submit">Register</button>
       </div>
-      <button type="submit">Register</button>
     </form>
   );
 }
@@ -81,13 +83,13 @@ function ThisWeekEventItem({ event }:{event:IEventThisWeek}) {
 
   const eventDate = new Date(event.EventDate);
   const dateString = eventDate.toDateString().split(' ');
-  console.log(eventDate);
+  // console.log(eventDate);
   return (
-    <div>
+    <>
       <h3>{dateString[1]}.{dateString[2]} ({dateString[0]})</h3>
       <h2>{event.EventName}</h2>
       <h2>{event.HostName}</h2>
-    </div>
+    </>
   );
 }
 function LogIn() {
@@ -108,14 +110,34 @@ function LogIn() {
     return <ThisWeekEventItem event={event} key={uuid.v4()} />;
   });
   return (
-    <div className="Login">
+    <div className="Login container h-full flex flex-col justify-center relative">
       {showRegister ? <RegisterForm setAuth={setAuth} /> : ''}
-      <div className="Login__EventThisWeek">
-        <h3>Event This Week</h3>
-        {thisWeekEvents}
+      <div className="container h-2/4 flex flex-col justify-center items-center space-y-3">
+        <h3 className="h-auto">Event This Week</h3>
+        <div className="container w-10/12 h-4/6  bg-white">
+          <ThisWeekEventItem
+            event={{
+              EventId: 'string',
+              EventName: 'string',
+              Week: 12,
+              EventDate: new Date(),
+              EventInfo: 'Something',
+              EventTags: [{
+                EventTagEng: 'string',
+                EventTagZht: 'string',
+              }],
+              HostName: 'string',
+              HostId: 'string'
+            }}
+            key={uuid.v4()}
+          />
+        </div>
+        {thisWeekEvents.length > 0 ? thisWeekEvents : ''}
+        <div className="container h-8 flex justify-center space-x-3"><div className="w-3 h-3 bg-darkgrey rounded-full" /></div>
       </div>
-      <div className="Login__LoginWithFB">
+      <div className="container h-1/5 flex flex-col justify-between items-center">
         <button
+          className="w-10/12 h-1/3 bg-grey rounded filter drop-shadow-login text-white"
           type="button"
           onClick={() => {
             FB.login((res:any) => {
@@ -128,10 +150,10 @@ function LogIn() {
         >
           Login With Facebook
         </button>
-      </div>
-      <div className="Login__CheckUsOut">
-        <button type="button">F</button>
-        <p>Check Us Out On Facebook</p>
+        <div className="container h-1/2 flex flex-col justify-between items-center">
+          <button type="button" className="h-10 w-10 ring ring-white rounded-full bg-blue-300">F</button>
+          <p>Check Us Out On Facebook</p>
+        </div>
       </div>
     </div>
   );

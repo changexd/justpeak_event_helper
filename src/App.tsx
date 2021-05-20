@@ -61,7 +61,7 @@ const App = () => {
 
   return (
     <Router>
-      <div className="App">
+      <div className="container h-screen flex flex-col bg-yellow">
         <Switch>
           {/* <HostProvider> */}
           <Route path="/login">

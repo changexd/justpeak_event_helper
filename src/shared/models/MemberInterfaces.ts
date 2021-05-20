@@ -11,9 +11,6 @@ export interface IMemberAPI {
   LoginMember:<T = any>(id: string, email: string)=>Promise<AxiosResponse<T>>;
   CreateMember:<T = any>(item:ICreateMember)=>Promise<AxiosResponse<T>>;
   GetMember:<T = any>(id:string)=>Promise<AxiosResponse<T>>;
-  GetHistoryEventParticipant:<T = any>(id:string)=>Promise<AxiosResponse<T>>;
-  GetHistoryEventHost:<T = any>(id:string)=>Promise<AxiosResponse<T>>;
-
 }
 
 export interface ICreateMember {

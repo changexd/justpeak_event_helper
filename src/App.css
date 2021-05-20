@@ -1,4 +1,4 @@
-.Header {
+/* .Header {
   height: 10vh;
   width: 100%;
   display: -webkit-box;
@@ -26,7 +26,7 @@
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
-  width: 70%;
+  width: 55%;
 }
 
 .Header .Header__Logo {
@@ -160,6 +160,19 @@ a {
   height: 40vh;
   background-color: #26c0d4;
   border-radius: 1rem;
+}
+
+.Login__EventThisWeek > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 90%;
+  height: 80%;
+  background-color: white;
 }
 
 .Login__LoginWithFB {
@@ -755,6 +768,14 @@ a {
           align-items: center;
 }
 
+.MyPage__History .active {
+  color: black;
+}
+
+.MyPage__History .inactive {
+  color: #aaaaaa;
+}
+
 .MyPage__label {
   width: 60%;
   display: -webkit-box;
@@ -1173,4 +1194,4 @@ a {
   display: flex;
   height: 85%;
 }
-/*# sourceMappingURL=App.css.map */
+# sourceMappingURL=App.css.map */
