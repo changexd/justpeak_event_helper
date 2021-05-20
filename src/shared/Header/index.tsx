@@ -7,12 +7,10 @@ export default function Header(props: {
   title: string;
 }) {
   return (
-    <div>
+    <>
       {props.title === 'SignUp' ? (
-        <div className="Header">
-          <div className="Header__SignUpLogo">
-            <img src={SignUpLogo} width="100%" alt="SignUpLogo" />
-          </div>
+        <div className="container h-24 flex flex-col justify-center items-center">
+          <img className="w-3/5" src={SignUpLogo} width="100%" alt="SignUpLogo" />
         </div>
       ) : (
         <div className="Header">
@@ -30,6 +28,6 @@ export default function Header(props: {
         </div>
       )}
       {props.children}
-    </div>
+    </>
   );
 }

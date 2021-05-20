@@ -25,5 +25,11 @@ export const EventAPI:IEventAPI = {
   },
   UpdatePaymentStatus: async (item:IUpdatePaymentStatus) => {
     return AxiosHandler('PUT', `${url}/UpdatePaymentStatus`, item, true);
+  },
+  GetHistoryEventParticipant: (MemberId:string) => {
+    return AxiosHandler('GET', `${url}/${MemberId}/history/participant`, true);
+  },
+  GetHistoryEventHost: (MemberId:string) => {
+    return AxiosHandler('GET', `${url}/${MemberId}/history/host`, true);
   }
 };

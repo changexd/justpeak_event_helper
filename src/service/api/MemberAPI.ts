@@ -18,11 +18,5 @@ export const MemberAPI:IMemberAPI = {
   },
   GetMember: (MemberId:string) => {
     return AxiosHandler('GET', `${url}/${MemberId}`, true);
-  },
-  GetHistoryEventParticipant: (MemberId:string) => {
-    return AxiosHandler('GET', `${url}/${MemberId}/history/participant`, true);
-  },
-  GetHistoryEventHost: (MemberId:string) => {
-    return AxiosHandler('GET', `${url}/${MemberId}/history/`, true);
   }
 };

@@ -33,7 +33,6 @@ function FBinit() {
   });
 }
 FBinit().then(startApp);
-
 function startApp() {
   ReactDOM.render(
     <React.StrictMode>

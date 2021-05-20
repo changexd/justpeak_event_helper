@@ -39,6 +39,12 @@
   }
 }
 .MyPage__History{
+  .active{
+    color: rgb(0, 0, 0)
+  }
+  .inactive{
+    color: rgb(170, 170, 170)
+  }
   height: 65%;
   // background-color:pink;
   display:flex;
